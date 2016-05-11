@@ -17,7 +17,7 @@ class IfcfgParser(MetaMixin):
                 break
         ifconfig_cmd_args = [ifconfig_cmd, '-a']
         patterns = [
-            '(?P<device>^[a-zA-Z0-9]+): flags=(?P<flags>.*) mtu (?P<mtu>.*)',
+            '(?P<device>^[a-zA-Z0-9.]+): flags=(?P<flags>.*) mtu (?P<mtu>.*)',
             '.*(inet )(?P<inet>[^\s]*).*',
             '.*(inet6 )(?P<inet6>[^\s]*).*',
             '.*(broadcast )(?P<broadcast>[^\s]*).*',
@@ -143,7 +143,7 @@ class UnixParser(IfcfgParser):
 class LinuxParser(UnixParser):
     class Meta:
         override_patterns = [
-            '(?P<device>^[a-zA-Z0-9:]+)(.*)Link encap:(.*).*',
+            '(?P<device>^[a-zA-Z0-9:\.]+)(.*)Link encap:(.*).*',
             '(.*)Link encap:(.*)(HWaddr )(?P<ether>[^\s]*).*',
             '.*(inet addr:)(?P<inet>[^\s]*).*',
             '.*(inet6 addr: )(?P<inet6>[^\s\/]*/(?P<prefixlen>[\d]*)).*',
